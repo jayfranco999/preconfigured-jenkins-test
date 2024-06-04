@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 17333eecfcfb0ea9e7bc89921052349b5fd279bb
 # Jenkins Docker Setup with JCasC
 
 This project provides a Jenkins setup using Docker with pre-installed plugins and Jenkins Configuration as Code (JCasC) plugin.
@@ -50,7 +53,11 @@ docker build -t custom-jenkins:latest .
 Run the following command to start the Jenkins container:
 
 ```sh
+<<<<<<< HEAD
 docker run -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 --restart=on-failure custom-jenkins:latest
+=======
+docker run -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 --restart=on-failure -e CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jenkins.yaml custom-jenkins:latest
+>>>>>>> 17333eecfcfb0ea9e7bc89921052349b5fd279bb
 
 ```
 ### 6. Access Jenkins
