@@ -7,32 +7,23 @@ jenkins:
         value: foo
       - key: VARIABLE2
         value: bar
+  
+  numExecutors: 0
+  
   securityRealm:
-    ldap:
-      configurations:
-        - groupMembershipStrategy:
-            fromUserRecord:
-              attributeName: "memberOf"
-          inhibitInferRootDN: false
-          rootDN: "dc=acme,dc=org"
-          server: "ldaps://ldap.acme.org:1636"
-
-  nodes:
-    - permanent:
-        name: "static-agent"
-        remoteFS: "/home/jenkins"
-        launcher:
-          inbound:
-            workDirSettings:
-              disabled: true
-              failIfWorkDirIsMissing: false
-              internalDir: "remoting"
-              workDirPath: "/tmp"
-
-  slaveAgentPort: 50000
-  agentProtocols:
-    - "jnlp2"
-
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+  authorizationStrategy: loggedInUsersCanDoAnything
+  
+unclassified:
+  location:
+    url: "${JENKINS_EXT_URL}"
+  timestamper:
+    allPipelines: true
+ 
 tool:
   git:
     installations:
