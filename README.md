@@ -37,22 +37,16 @@ Ensure you have the following files in your project directory:
 - Dockerfile
 - plugins.txt
 - casc_configs/jenkins.yaml
+- docker-compose.yml
 
-### 4. Build the Docker Image
-Run the following command to build the Docker image:
-
-```sh
-docker build -t custom-jenkins:latest .
-```
-
-### 5. Run the Docker Container
-Run the following command to start the Jenkins container:
+### 4. Build and run the Docker Image using docker-compose
+cd to the local directory consisting this repo and run the following command to build and start the jenkins instance:
 
 ```sh
-docker run -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 --restart=on-failure custom-jenkins:latest
-
+docker-compose up -d
 ```
-### 6. Access Jenkins
+
+### 5. Access Jenkins
 Open your browser and go to http://localhost:8080. Jenkins should be running with the Configuration as Code setup.
 
 ## Configuration
