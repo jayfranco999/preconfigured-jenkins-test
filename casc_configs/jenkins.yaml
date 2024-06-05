@@ -18,6 +18,12 @@ jenkins:
           password: "admin"
   authorizationStrategy: loggedInUsersCanDoAnything
  
+ unclassified:
+  location:
+    url: "${JENKINS_EXT_URL}"
+  timestamper:
+    allPipelines: true
+
 tool:
   git:
     installations:
