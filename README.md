@@ -40,7 +40,7 @@ Ensure you have the following files in your project directory:
 - docker-compose.yml
 
 ### 4. Build and run the Docker Image using docker-compose
-cd to the local directory consisting this repo and run the following command to build and start the jenkins instance:
+cd to the local directory consisting this repo and run the following command to build and start the Jenkins instance:
 
 ```sh
 docker-compose up -d
