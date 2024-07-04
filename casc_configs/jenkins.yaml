@@ -7,9 +7,9 @@ jenkins:
         value: foo
       - key: VARIABLE2
         value: bar
-  
-  numExecutors: 0
-  
+
+  numExecutors: 5
+
   securityRealm:
     local:
       allowsSignup: false
@@ -17,7 +17,23 @@ jenkins:
         - id: "admin"
           password: "admin"
   authorizationStrategy: loggedInUsersCanDoAnything
- 
+
+  nodes:
+  - permanent:
+      labelString: "agent1"
+      launcher:
+        ssh:
+          credentialsId: "Jenkins"
+          host: "ssh-agent"
+          port: 22
+          sshHostKeyVerificationStrategy:
+            manuallyTrustedKeyVerificationStrategy:
+              requireInitialManualTrust: false
+      mode: EXCLUSIVE
+      name: "agent1"
+      remoteFS: "/home/jenkins/agent"
+      retentionStrategy: "always"
+
 unclassified:
   location:
     url: "${JENKINS_EXT_URL}"
@@ -30,3 +46,14 @@ tool:
       - name: git
         home: /usr/local/bin/git
 
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - basicSSHUserPrivateKey:
+          description: "The jenkins ssh key"
+          id: "Jenkins"
+          # Use public key from environment variable
+          privateKeySource:
+            directEntry:
+              privateKey: "${JENKINS_AGENT_PRIVATEKEY}"
