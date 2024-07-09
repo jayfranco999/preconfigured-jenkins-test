@@ -39,7 +39,13 @@ jenkins:
       name: "MacOS_inbound_agent1"
       remoteFS: "/Users/jayfrancis/jenkins_agent"
       retentionStrategy: "always"
-
+  - permanent:
+      labelString: "docker-agent"
+      launcher: "inbound"
+      name: "Docker-agent"
+      remoteFS: "/home/jenkins"
+      retentionStrategy: "always"
+      
 unclassified:
   location:
     url: "${JENKINS_EXT_URL}"
