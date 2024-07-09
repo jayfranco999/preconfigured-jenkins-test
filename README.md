@@ -37,6 +37,7 @@ Ensure you have the following files in your project directory:
 - Dockerfile
 - plugins.txt
 - casc_configs/jenkins.yaml
+- .env file with JENKINS_AGENT_SSH_PUBKEY, JENKINS_AGENT_PRIVATEKEY and JENKINS_EXT_URL values
 - docker-compose.yml
 
 ### 4. Build and run the Docker Image using docker-compose
@@ -48,6 +49,23 @@ docker-compose up -d
 
 ### 5. Access Jenkins
 Open your browser and go to http://127.0.0.1:8080. Jenkins should be running with the Configuration as Code setup. test for difference
+
+## Generating an SSH Key pair for your Jenkins controller
+Follow the steps in the following link to generate the values required for the .env file
+https://www.jenkins.io/doc/book/using/using-agents/#generating-an-ssh-key-pair
+
+## Setting up a docker inbound agent 
+
+### 1. Use the Docker pull command to pull the latest docker inbound-agent image
+docker pull jenkins/inbound-agent
+
+### 2. Run the docker container with the following command replacing < your_jenkins_url > and  < secret >
+
+You can find the secret on the jenkins dashboard once you login to jenkins under Dashboard > Manage Jenkins > Nodes > Docker-agent
+
+```sh
+docker run --init --network preconfigured_jenkins_default jenkins/inbound-agent -url <your_jenkins_url> <secret> Docker-agent
+```
 
 ## Configuration
 Jenkins Configuration as Code (JCasC) is set up using the casc_configs/jenkins.yaml file. Modify this file to change Jenkins configuration.
