@@ -73,3 +73,11 @@ Jenkins Configuration as Code (JCasC) is set up using the casc_configs/jenkins.y
 
 ## Custom Plugins
 The plugins.txt file contains the list of plugins to be installed. Modify this file to add or update plugins.
+
+## Docker compose down
+
+To restart or stop the jenkins controller, use the docker-compose down command with the -v flag. Any changes in casc_configs will reflect only on restarting the container after docker-compose down command.
+
+```sh
+docker-compose down -v
+```
