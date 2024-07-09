@@ -57,10 +57,11 @@ https://www.jenkins.io/doc/book/using/using-agents/#generating-an-ssh-key-pair
 ## Setting up a docker inbound agent 
 
 ### 1. Use the Docker pull command to pull the latest docker inbound-agent image
+```sh
 docker pull jenkins/inbound-agent
+```
 
 ### 2. Run the docker container with the following command replacing < your_jenkins_url > and  < secret >
-
 You can find the secret on the jenkins dashboard once you login to jenkins under Dashboard > Manage Jenkins > Nodes > Docker-agent
 
 ```sh
