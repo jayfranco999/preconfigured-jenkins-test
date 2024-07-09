@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:lts-jdk17
+FROM jenkins/jenkins:jdk17
 
 # Disable the setup wizard
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false

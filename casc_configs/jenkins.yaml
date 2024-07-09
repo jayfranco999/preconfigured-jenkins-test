@@ -8,7 +8,7 @@ jenkins:
       - key: VARIABLE2
         value: bar
 
-  numExecutors: 5
+  numExecutors: 0
 
   securityRealm:
     local:
