@@ -33,6 +33,12 @@ jenkins:
       name: "agent1"
       remoteFS: "/home/jenkins/agent"
       retentionStrategy: "always"
+  - permanent:
+      labelString: "macos"
+      launcher: "inbound"
+      name: "MacOS_inbound_agent1"
+      remoteFS: "/Users/jayfrancis/jenkins_agent"
+      retentionStrategy: "always"
 
 unclassified:
   location:
