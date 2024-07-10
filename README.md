@@ -44,7 +44,7 @@ Ensure you have the following files in your project directory:
 cd to the local directory consisting this repo and run the following command to build and start the Jenkins instance:
 
 ```sh
-docker-compose up -d
+Docker-compose up --build -d
 ```
 
 ### 5. Access Jenkins
