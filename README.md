@@ -79,7 +79,7 @@ To run the agent, copy the 2nd command in the above image with the webSocket fla
 
 ## Create a parallel pipeline job using the Jenkinsfile
 
-###1. Select 'New Item' on the Jenkins dashboard
+### 1. Select 'New Item' on the Jenkins dashboard
 <img width="365" alt="image" src="https://github.com/user-attachments/assets/e6785597-252b-4ca3-ae63-cbe0ffd74802">
 
 ### 2. Select pipeline and name your pipeline
