@@ -1,12 +1,5 @@
 jenkins:
   systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
-  globalNodeProperties:
-  - envVars:
-      env:
-      - key: VARIABLE1
-        value: foo
-      - key: VARIABLE2
-        value: bar
 
   numExecutors: 0
 
@@ -39,12 +32,6 @@ jenkins:
       name: "MacOS_inbound_agent1"
       remoteFS: "/Users/jayfrancis/jenkins_agent"
       retentionStrategy: "always"
-  - permanent:
-      labelString: "docker-agent"
-      launcher: "inbound"
-      name: "Docker-agent"
-      remoteFS: "/home/jenkins"
-      retentionStrategy: "always"
       
 unclassified:
   location:
@@ -52,11 +39,10 @@ unclassified:
   timestamper:
     allPipelines: true
 
-tool:
-  git:
-    installations:
-      - name: git
-        home: /usr/local/bin/git
+appearance:
+  pipelineGraphView:
+    showGraphOnBuildPage: true
+    showGraphOnJobPage: true
 
 credentials:
   system:
