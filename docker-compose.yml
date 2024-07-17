@@ -10,7 +10,7 @@ services:
       - jenkins_home:/var/jenkins_home
     restart: on-failure
     environment:
-      - JENKINS_EXT_URL=http://127.0.0.1:8080
+      - JENKINS_EXT_URL=${JENKINS_EXT_URL}
     env_file:
       - .env
 

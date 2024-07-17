@@ -1,7 +1,7 @@
 FROM jenkins/jenkins:jdk17
 
 # Disable the setup wizard
-ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+ENV JAVA_OPTS=-Djenkins.install.runSetupWizard=false
 
 # Set the JCasC configuration path
 ENV CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jenkins.yaml
