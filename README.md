@@ -6,6 +6,7 @@ This project provides a Jenkins setup using Docker with pre-installed plugins an
 
 - Docker
 - Git
+- Ngrok
 
 ## Getting Started
 
@@ -44,29 +45,60 @@ Ensure you have the following files in your project directory:
 cd to the local directory consisting this repo and run the following command to build and start the Jenkins instance:
 
 ```sh
-Docker-compose up --build -d
+docker compose up —build -—force-recreate
+```
+### 5. Host the port 8080 on a public Ngrok url
+Follow the steps in the link to ensure your ngrok is up and running:
+https://ngrok.com/docs/getting-started/
+Once ngrok is installed, run:
+
+```sh
+ngrok http http://localhost:8080
 ```
 
 ### 5. Access Jenkins
-Open your browser and go to http://127.0.0.1:8080. Jenkins should be running with the Configuration as Code setup. test for difference
+Open your browser and go to the ngrok url generated. Jenkins should be running with the Configuration as Code setup. test for difference
+<img width="852" alt="image" src="https://github.com/user-attachments/assets/e13cf933-c65a-4684-8838-7b3a03fd6123">
 
 ## Generating an SSH Key pair for your Jenkins controller
 Follow the steps in the following link to generate the values required for the .env file
 https://www.jenkins.io/doc/book/using/using-agents/#generating-an-ssh-key-pair
 
-## Setting up a docker inbound agent 
+## Setting up a local inbound agent 
 
-### 1. Use the Docker pull command to pull the latest docker inbound-agent image
+### Download and run the MacOS_inbound_agent jar file on any local directory on your local computer
+Click on the MacOS_inbound_agent under build executor status on your Jenkins controller UI and use the curl command below to download the agent jar file:
+
+![image](https://github.com/user-attachments/assets/e30d86e7-439c-450f-ac99-2d8cfd509c5f)
+
+To run the agent, copy the 2nd command in the above image with the webSocket flag at the end of the command
+
 ```sh
-docker pull jenkins/inbound-agent
+-webSocket
 ```
 
-### 2. Run the docker container with the following command replacing < your_jenkins_url > and  < secret >
-You can find the secret on the jenkins dashboard once you login to jenkins under Dashboard > Manage Jenkins > Nodes > Docker-agent
+## Create a parallel pipeline job using the Jenkinsfile
 
-```sh
-docker run --init --network preconfigured_jenkins_default jenkins/inbound-agent -url <your_jenkins_url> <secret> Docker-agent
-```
+###1. Select 'New Item' on the Jenkins dashboard
+<img width="365" alt="image" src="https://github.com/user-attachments/assets/e6785597-252b-4ca3-ae63-cbe0ffd74802">
+
+### 2. Select pipeline and name your pipeline
+<img width="1100" alt="image" src="https://github.com/user-attachments/assets/29caf186-8dd5-432a-80e8-da65e008c21e">
+
+### 3. Scroll down to pipeline definition and select 'Pipeline from SCM'
+<img width="1224" alt="image" src="https://github.com/user-attachments/assets/d93fadf7-272a-483a-9709-854777776ced">
+
+### 4. Add this github repository link and specify branch as 'main'
+repo link:- https://github.com/jayfranco999/preconfigured-jenkins-test.git 
+<img width="1171" alt="image" src="https://github.com/user-attachments/assets/26add33a-16f4-4b41-9151-aefbfd7fac5b">
+save and apply.
+
+### 5. Make the build
+Dashboard > YOUR_PIPE > Build Now
+<img width="366" alt="image" src="https://github.com/user-attachments/assets/1ee2cd53-49f0-4d1f-bb77-da59c792bc69">
+The build should run a parallel pipeline on your inbound and ssh agents.
+<img width="1383" alt="image" src="https://github.com/user-attachments/assets/1cd4b9e6-7729-4221-8f10-a9a2606cecee">
+
 
 ## Configuration
 Jenkins Configuration as Code (JCasC) is set up using the casc_configs/jenkins.yaml file. Modify this file to change Jenkins configuration.
