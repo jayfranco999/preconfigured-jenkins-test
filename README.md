@@ -95,8 +95,11 @@ save and apply.
 
 ### 5. Make the build
 Dashboard > YOUR_PIPE > Build Now
+
 <img width="366" alt="image" src="https://github.com/user-attachments/assets/1ee2cd53-49f0-4d1f-bb77-da59c792bc69">
+
 The build should run a parallel pipeline on your inbound and ssh agents.
+
 <img width="1383" alt="image" src="https://github.com/user-attachments/assets/1cd4b9e6-7729-4221-8f10-a9a2606cecee">
 
 
