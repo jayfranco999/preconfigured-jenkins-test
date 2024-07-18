@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -ex
+
+list="/usr/share/jenkins/ref/plugins.txt"
+if [[ "$#" -eq 1 ]]; then
+    list=$1
+fi
+
+cd "$(dirname "$0")" || exit 1
+
+echo "Updating plugins"
+
+# Fetches the latest plugin manager version via API
+PM_CLI_DOWNLOAD_URL=$(curl -s https://api.github.com/repos/jenkinsci/plugin-installation-manager-tool/releases/latest | jq -r 'first(.assets[] | select(.content_type=="application/x-java-archive" or .content_type=="application/java-archive")).browser_download_url')
+
+TMP_DIR=$(mktemp -d)
+
+wget --no-verbose "${PM_CLI_DOWNLOAD_URL}" -O "${TMP_DIR}/jenkins-plugin-manager.jar"
+
+# Use the determined Jenkins version
+CURRENT_JENKINS_VERSION="2.468"
+wget --no-verbose "https://get.jenkins.io/war/${CURRENT_JENKINS_VERSION}/jenkins.war" -O "${TMP_DIR}/jenkins.war"
+
+cd ../ || exit 1
+
+# Iterate through each txt file starting with "plugins-", or the file specified as input
+for pluginfile in ${list}; do
+    if [ -e "${pluginfile}" ]; then
+        echo "Updating plugins file: ${pluginfile}"
+
+        java -jar "${TMP_DIR}/jenkins-plugin-manager.jar" -f "${pluginfile}" --available-updates --output txt --war "${TMP_DIR}/jenkins.war"  > plugins2.txt
+
+        mv plugins2.txt "${pluginfile}"
+    else
+        echo "No plugin files found matching pattern: ${pluginfile}"
+    fi
+done
+
+rm -rf "${TMP_DIR}"
+
+echo "Updating plugins complete"
