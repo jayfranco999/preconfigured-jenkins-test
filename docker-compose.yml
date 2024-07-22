@@ -10,8 +10,8 @@ services:
       - jenkins_home:/var/jenkins_home
     restart: on-failure
     environment:
-      - JENKINS_EXT_URL="${JENKINS_EXT_URL}"
-      - JENKINS_AGENT_PRIVATEKEY="${JENKINS_AGENT_PRIVATEKEY}"
+      - JENKINS_EXT_URL
+      - JENKINS_AGENT_PRIVATEKEY
 
   ssh-agent:
     image: jenkins/ssh-agent:jdk17
